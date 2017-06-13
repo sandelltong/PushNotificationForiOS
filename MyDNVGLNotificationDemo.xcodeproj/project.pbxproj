@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		452C58471ED9504C00DE8472 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 452C58461ED9504C00DE8472 /* main.m */; };
 		452C584A1ED9504C00DE8472 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 452C58491ED9504C00DE8472 /* AppDelegate.m */; };
 		452C584D1ED9504C00DE8472 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 452C584C1ED9504C00DE8472 /* ViewController.m */; };
 		452C58501ED9504C00DE8472 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452C584E1ED9504C00DE8472 /* Main.storyboard */; };
 		452C58521ED9504C00DE8472 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 452C58511ED9504C00DE8472 /* Assets.xcassets */; };
 		452C58551ED9504C00DE8472 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 452C58531ED9504C00DE8472 /* LaunchScreen.storyboard */; };
+		452C58601ED960C000DE8472 /* WindowsAzureMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 452C585F1ED960C000DE8472 /* WindowsAzureMessaging.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		452C58731EDFA58500DE8472 /* Notifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 452C58721EDFA58500DE8472 /* Notifications.m */; };
+		452C58741EE167BE00DE8472 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 452C58461ED9504C00DE8472 /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,11 @@
 		452C58511ED9504C00DE8472 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		452C58541ED9504C00DE8472 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		452C58561ED9504C00DE8472 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		452C585E1ED95C8700DE8472 /* HubInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HubInfo.h; sourceTree = "<group>"; };
+		452C585F1ED960C000DE8472 /* WindowsAzureMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WindowsAzureMessaging.framework; sourceTree = "<group>"; };
+		452C58671EDE959000DE8472 /* MyDNVGLNotificationDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyDNVGLNotificationDemo.entitlements; sourceTree = "<group>"; };
+		452C58711EDFA58500DE8472 /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
+		452C58721EDFA58500DE8472 /* Notifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notifications.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				452C58601ED960C000DE8472 /* WindowsAzureMessaging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +50,7 @@
 		452C58391ED9504B00DE8472 = {
 			isa = PBXGroup;
 			children = (
+				452C585F1ED960C000DE8472 /* WindowsAzureMessaging.framework */,
 				452C58441ED9504C00DE8472 /* MyDNVGLNotificationDemo */,
 				452C58431ED9504C00DE8472 /* Products */,
 			);
@@ -58,6 +67,7 @@
 		452C58441ED9504C00DE8472 /* MyDNVGLNotificationDemo */ = {
 			isa = PBXGroup;
 			children = (
+				452C58671EDE959000DE8472 /* MyDNVGLNotificationDemo.entitlements */,
 				452C58481ED9504C00DE8472 /* AppDelegate.h */,
 				452C58491ED9504C00DE8472 /* AppDelegate.m */,
 				452C584B1ED9504C00DE8472 /* ViewController.h */,
@@ -67,6 +77,9 @@
 				452C58531ED9504C00DE8472 /* LaunchScreen.storyboard */,
 				452C58561ED9504C00DE8472 /* Info.plist */,
 				452C58451ED9504C00DE8472 /* Supporting Files */,
+				452C585E1ED95C8700DE8472 /* HubInfo.h */,
+				452C58711EDFA58500DE8472 /* Notifications.h */,
+				452C58721EDFA58500DE8472 /* Notifications.m */,
 			);
 			path = MyDNVGLNotificationDemo;
 			sourceTree = "<group>";
@@ -105,6 +118,10 @@
 		452C583A1ED9504C00DE8472 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					Subscribe,
+					WorldSwitch,
+				);
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = Dnvgl;
 				TargetAttributes = {
@@ -112,6 +129,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 38SQ9TU5CJ;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -151,9 +173,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				452C58731EDFA58500DE8472 /* Notifications.m in Sources */,
 				452C584D1ED9504C00DE8472 /* ViewController.m in Sources */,
+				452C58741EE167BE00DE8472 /* main.m in Sources */,
 				452C584A1ED9504C00DE8472 /* AppDelegate.m in Sources */,
-				452C58471ED9504C00DE8472 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,9 +224,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -253,6 +278,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -275,11 +301,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MyDNVGLNotificationDemo/MyDNVGLNotificationDemo.entitlements;
 				DEVELOPMENT_TEAM = 38SQ9TU5CJ;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MyDNVGLNotificationDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dnvgl.MyDNVGLNotificationDemo;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dnvgl.mydnvglnotificationdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -287,11 +324,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MyDNVGLNotificationDemo/MyDNVGLNotificationDemo.entitlements;
 				DEVELOPMENT_TEAM = 38SQ9TU5CJ;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = MyDNVGLNotificationDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.dnvgl.MyDNVGLNotificationDemo;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.dnvgl.mydnvglnotificationdemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
@@ -314,6 +362,7 @@
 				452C585B1ED9504C00DE8472 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

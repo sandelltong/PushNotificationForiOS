@@ -5,8 +5,10 @@
 //  Created by Dnvgl on 27/05/2017.
 //  Copyright © 2017 Dnvgl. All rights reserved.
 //
+#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 #import "AppDelegate.h"
+#import <UserNotifications/UserNotifications.h>
 
 @interface AppDelegate ()
 
@@ -16,10 +18,39 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
+    self.notifications = [[Notifications alloc] initWithConnectionString:HUBLISTENACCESS HubName:HUBNAME];
+    
     // Override point for customization after application launch.
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound |
+                                            UIUserNotificationTypeAlert | UIUserNotificationTypeBadge categories:nil];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+    
     return YES;
 }
 
+- (void)registerForRemoteNotifications {
+    if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")){
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+            if(!error){
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            }
+        }];
+    }
+    else {
+        // Code for old versions
+        //UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound |
+                                                //UIUserNotificationTypeAlert | UIUserNotificationTypeBadge categories:nil];
+        
+        //[[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        //[[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -46,6 +77,54 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *) deviceToken {
+    
+    SBNotificationHub* hub = [[SBNotificationHub alloc] initWithConnectionString:HUBLISTENACCESS
+                                                             notificationHubPath:HUBNAME];
+
+    self.notifications.deviceToken = deviceToken;
+    
+    // Retrieves the categories from local storage and requests a registration for these categories
+    // each time the app starts and performs a registration.
+    
+    //NSSet* categories = [self.notifications retrieveCategories];
+    //[self.notifications subscribeWithCategories:categories completion:^(NSError* error) {
+    //    if (error != nil) {
+    //        NSLog(@"Error registering for notifications: %@", error);
+    //    }
+    //    else {
+    //        [self MessageBox:@"Registration Status" message:@"Registered"];
+    //    }
+    //}];
+}
+
+
+// Handle any failure to register
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:
+(NSError *)error {
+    NSLog(@"Failed to register for remote notifications: %@", error);
+}
+
+
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification: (NSDictionary *)userInfo {
+    NSLog(@"%@", userInfo);
+    [self MessageBox:@"Notification" message:[[userInfo objectForKey:@"aps"] valueForKey:@"alert"]];
+}
+
+
+-(void)MessageBox:(NSString *)title message:(NSString *)messageText
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:messageText delegate:self
+                                          cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [alert show];
+    //UIAlertController * alert = [UIAlertController alertControllerWithTitle:title message:messageText preferredStyle:UIAlertControllerStyleAlert];
+    //UIAlertAction * okButton = [UIAlertAction actionWithTitle:@"OK" style: UIAlertActionStyleDefault handler:
+    //                            ^(UIAlertAction * action) {}];
+    //[alert addAction:okButton];
+}
+
 
 
 @end
