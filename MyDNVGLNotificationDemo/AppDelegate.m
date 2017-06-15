@@ -29,6 +29,8 @@
     [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     
+    //UILocalNotification *localNotif = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    
     return YES;
 }
 
@@ -110,7 +112,19 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification: (NSDictionary *)userInfo {
     NSLog(@"%@", userInfo);
-    [self MessageBox:@"Notification" message:[[userInfo objectForKey:@"aps"] valueForKey:@"alert"]];
+    NSString *alert=[[userInfo objectForKey:@"aps"] valueForKey:@"alert"];
+    NSString *action=[[userInfo objectForKey:@"aps"] valueForKey:@"action"];
+    NSString *type=[[userInfo objectForKey:@"aps"] valueForKey:@"type"];
+    
+    NSString *messageText = [alert stringByAppendingString:@"\n\naction:"];
+    if (action != nil) {
+        messageText = [messageText stringByAppendingString:action];
+    }
+    messageText = [messageText stringByAppendingString:@"\n\ntype:"];
+    if (type != nil) {
+        messageText = [messageText stringByAppendingString:type];
+    }
+    [self MessageBox:@"Notification" message: messageText];
 }
 
 
@@ -124,7 +138,5 @@
     //                            ^(UIAlertAction * action) {}];
     //[alert addAction:okButton];
 }
-
-
 
 @end

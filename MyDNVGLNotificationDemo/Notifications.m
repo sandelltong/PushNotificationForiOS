@@ -84,7 +84,7 @@ SBNotificationHub* hub;
 {
     //[hub registerNativeWithDeviceToken:self.deviceToken tags:categories completion: completion];
     
-    NSString* templateBodyAPNS = @"{\"aps\":{\"alert\":\"$(Message)\"}}";
+    NSString* templateBodyAPNS = @"{\"aps\":{\"alert\":\"$(Message)\", \"action\":\"$(action)\", \"type\":\"$(type)\"}}";
     
     NSMutableArray* catArray = [[NSMutableArray alloc] init];
     for(NSString *category in categories.allObjects)
