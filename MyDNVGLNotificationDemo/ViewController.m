@@ -58,23 +58,28 @@
     [self.view addSubview:SportsSwitch];
     [SportsSwitch addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
     
-    
+    UISwitch *UserSwitch =[[UISwitch alloc] initWithFrame:CGRectMake(180,220,100,30)];
+    UserSwitch.tag = 4;
+    [self.view addSubview:UserSwitch];
+    [UserSwitch addTarget:self action:@selector(switchChange:) forControlEvents:UIControlEventValueChanged];
    
     
-    if ([categories containsObject:@"2572ddea-551d-4361-a08b-739256809383"]){
+    if ([categories containsObject:@"channel:2572ddea-551d-4361-a08b-739256809383"]){
         WorldSwitch.on = true;
     }
-    if ([categories containsObject:@"fd3dedb8-0212-4222-8232-6b593af020db"]){
+    if ([categories containsObject:@"channel:fd3dedb8-0212-4222-8232-6b593af020db"]){
         PoliticsSwitch.on = true;
     }
-    if ([categories containsObject:@"851d2ca8-6f2c-486a-be4e-6d0cee37ff7e"]){
+    if ([categories containsObject:@"channel:851d2ca8-6f2c-486a-be4e-6d0cee37ff7e"]){
         SportsSwitch.on = true;
     }
-      
+    if ([categories containsObject:@"user:8fe2b116-68fb-4629-8c31-2ccc9b063066"]){
+        UserSwitch.on = true;
+    }
         
 //    CGRect buttonFrame = CGRectMake(55,220,100,30);
 //    UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(80,220,100,30)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(80,280,100,30)];
     [UIButton buttonWithType:UIButtonTypeCustom];
     
     [button setTitle:@"Subscribe" forState:UIControlStateNormal];
@@ -98,21 +103,27 @@
     
     if(mySwitch.tag == 1){
         if(mySwitch.isOn == true){
-          [self.GArray addObject:@"2572ddea-551d-4361-a08b-739256809383"];
+          [self.GArray addObject:@"channel:2572ddea-551d-4361-a08b-739256809383"];
         }else{
-            [self.GArray removeObject:@"2572ddea-551d-4361-a08b-739256809383"];
+            [self.GArray removeObject:@"channel:2572ddea-551d-4361-a08b-739256809383"];
         }
     }else if(mySwitch.tag == 2){
         if(mySwitch.isOn == true){
-            [self.GArray addObject:@"fd3dedb8-0212-4222-8232-6b593af020db"];
+            [self.GArray addObject:@"channel:fd3dedb8-0212-4222-8232-6b593af020db"];
         }else{
-            [self.GArray removeObject:@"fd3dedb8-0212-4222-8232-6b593af020db"];
+            [self.GArray removeObject:@"channel:fd3dedb8-0212-4222-8232-6b593af020db"];
         }
     }else if(mySwitch.tag == 3){
         if(mySwitch.isOn == true){
-            [self.GArray addObject:@"851d2ca8-6f2c-486a-be4e-6d0cee37ff7e"];
+            [self.GArray addObject:@"channel:851d2ca8-6f2c-486a-be4e-6d0cee37ff7e"];
         }else{
-            [self.GArray removeObject:@"851d2ca8-6f2c-486a-be4e-6d0cee37ff7e"];
+            [self.GArray removeObject:@"channel:851d2ca8-6f2c-486a-be4e-6d0cee37ff7e"];
+        }
+    }else if(mySwitch.tag == 4){
+        if(mySwitch.isOn == true){
+            [self.GArray addObject:@"user:8fe2b116-68fb-4629-8c31-2ccc9b063066"];
+        }else{
+            [self.GArray removeObject:@"user:8fe2b116-68fb-4629-8c31-2ccc9b063066"];
         }
     }
 }
@@ -135,7 +146,7 @@
             
             [self MessageBox:@"Notification" message:@"Subscribed!"];
         } else {
-            NSLog(@"Error subscribing: %@", error);
+            [self MessageBox:@"Error" message:error.localizedDescription];
         }
     }];
 }

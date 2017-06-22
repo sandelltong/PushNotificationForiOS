@@ -86,15 +86,7 @@ SBNotificationHub* hub;
     
     NSString* templateBodyAPNS = @"{\"aps\":{\"alert\":\"$(Message)\", \"action\":\"$(action)\", \"type\":\"$(type)\"}}";
     
-    NSMutableArray* catArray = [[NSMutableArray alloc] init];
-    for(NSString *category in categories.allObjects)
-    {
-        NSMutableString *final = [[NSMutableString alloc] initWithString:@"channel:"];
-        [final appendString:category];
-        [catArray addObject: final];
-    }
-    [catArray addObject: @"user:8fe2b116-68fb-4629-8c31-2ccc9b063066"];
-    NSSet *tags = [NSSet setWithArray:catArray];
+    NSSet *tags = [NSSet setWithArray:categories.allObjects];
     
     NSError *error=nil;
     bool result = [hub unregisterAllWithDeviceToken: self.deviceToken error: &error];
