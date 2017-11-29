@@ -3,9 +3,9 @@ Title: Notification service
 Author: "Tong, Xiao Gang Tony"
 Contributors: ""
 ---
-##Notification Service
+## Notification Service
 
-###What is a notification?
+### What is a notification?
 A notification is a short message to a customer telling him that we have some new information that we think is relevant for him to know. The notification can have links to further information or an action we want the customer to do but it should not be a lengthy text.
 
 Examples:
@@ -17,7 +17,7 @@ A notification is not an action/task but some notifications could be notifying y
 
 A notification should not be used as general information newsletters or for marketing purposes. Using our online marketing tool Eloqua is better suited for this purpose.
 
-###How does it work? 
+### How does it work? 
 
 When our customers are using a specific digital service they can also subcribe to notifications related to this service, if the service is offering notifications.The customers can set their notification preferences, do they want to subscribe to notifications from a service or not? How do they want the notification delivered?
 
@@ -34,11 +34,11 @@ Based on the customers preferences on how they want the notification delivered M
 
 If a digital service are offering different kind of notifications these can be set up as separate notification channels so that the customer can subscribe to them independently.
 
-###How to send notification through Notification Service
+### How to send notification through Notification Service
 
 Service API has provided the API methods to use the notification service, you can find the details there.
 
-###How to develop mobile apps to use push notification
+### How to develop mobile apps to use push notification
 
 Notification Service can support to send push notification to native mobile apps in all kinds of different devices like Android, iOS, Windows phone etc. To be able to use the push notification from Veracity, you need to do below two things:
 
@@ -122,5 +122,5 @@ public void subscribeToCategories(final Set<String> categories) {
 ```                       
 6. How to show the notification when it's received while the app is active, you need to implement the method onReceive on MyHandler.java as the demo application.
 
-####How to send notification through your back-end application
+#### How to send notification through your back-end application
 It needs to call Send Message API to send notification, please refer Service API for Notification. 
