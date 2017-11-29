@@ -50,16 +50,21 @@ Notification Service can support to send push notification to native mobile apps
 * iOS development
 
 1. If you don't have any idea on Notification Hub and iOS development, please read through this  [guide](https://docs.microsoft.com/en-us/azure/notification-hubs/notification-hubs-ios-apple-push-notification-apns-get-started) on how to develop an mobile app on iOS to register notification template and receive notification.
+
 2. When register your app for push notifications:
   - If you are using explicit app id, then it means you need a separated notification hub for your app to send push notification. please generate a certification for your app id through Apple Developer Center. After you get the certification, please send it to Veracity team. Someone in Veracity team will create a notification hub for your app and config the apple notification service to use the certificate to send push notification. He can also send you the notification hub name and connection string that you will use them in your native app.
   - If you are using wildcard app id, please check with Veracity team whether this app id has already been registered in  Notification Service. If it is already registered, you can ask for the notification hub name and connection string for this wildcard app id. if it hasn't been registered yet, please generate a certification for your app id through Apple Developer Center. Then you can ask Veracity team to create notification hub and send you back the hub name and connection string.
   -  Now we have provided below notification hubs (it will be updated when we created more):
+  
 3. Notification Service uses templates to send platform-agnostic notifications targeting all devices across platforms, see more info here. So you need to define your notification template that you would like to use for your app users, here is the example:
+
 ``` Object C: 
 NSString* templateBodyAPNS = @"{\"aps\":{\"alert\":\"$(Message)\", \"action\":\"$(action)\", \"type\":\"$(type)\"}}";
 ```
-   when you send notification through MyDNVGL Notification API, you can provide the value for those template parameters.    
+when you send notification through MyDNVGL Notification API, you can provide the value for those template parameters.  
+
 4. For broadcast notification, you need to get the Channel Id which you need to ask from your service admin. Then you need to use the Channel Id ("channel:<GUID>") as tags when register template in notification hub. Here is an example:
+  
 ``` Object C:
 NSMutableArray* catArray = [[NSMutableArray alloc] init];
 for(NSString *category in categories.allObjects)
@@ -71,20 +76,25 @@ for(NSString *category in categories.allObjects)
 NSSet *tags = [NSSet setWithArray:catArray];
 result = [hub registerTemplateWithDeviceToken:self.deviceToken name:@"simpleAPNSTemplate" jsonBodyTemplate:templateBodyAPNS expiryTemplate:@"0" tags:tags error:&error];
 ```
+
 5. For sending notification to specified users, you need to register the user id after the user log into your app. Then you can register the user id ("user:<GUID>") as additional tag on Channel Id.
+  
 6. How to show the notification when it's received while the app is active, you need to implement the method didReceiveRemoteNotification on AppDelegate.m as the demo application.
 
 * Android development
 
 1. If you don't have any idea on Notification Hub and Android development, please read through this [guide](https://docs.microsoft.com/en-us/azure/notification-hubs/notification-hubs-chrome-push-notifications-get-started) on how to develop an mobile app on Android to register notification template and receive notification.
+
 2. When register your app for push notifications:
 Please check with MYDNVGL team and ask for th notification hub name,sender id and connection string.
 Now we have provided below notification hubs (it will be updated when we create more).
+
 3. Notification Service uses templates to send platform-agnostic notifications targeting all devices across platforms and we can push notifications by using tags, see more info here. And on android side you should define template to accept the message:
+
 ```
  String templateBodyGCM = "{\"data\":{\"message\":\"$(message)\",\"open_type\":\"$(open_type)\"}}";  
  ```
-   when you send notification through MyDNVGL Notification API, you can provide the value for those template parameters. 
+ when you send notification through MyDNVGL Notification API, you can provide the value for those template parameters. 
  
  4. For broadcast notification, you need to get the Channel Id which you need to ask from your service admin. We can register this channel id ("channel:<GUID>") as a basic tag for receiving broadcast notifications
  
@@ -117,7 +127,8 @@ public void subscribeToCategories(final Set<String> categories) {
   }
   }.execute(null, null, null);
 }
-```                       
+```           
+
 6. How to show the notification when it's received while the app is active, you need to implement the method onReceive on MyHandler.java as the demo application.
 
 #### How to send notification through your back-end application
