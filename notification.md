@@ -36,16 +36,16 @@ If a digital service are offering different kind of notifications these can be s
 
 ### How to send notification through Notification Service
 
-Service API has provided the API methods to use the notification service, you can find the details there.
+Service API has provided the API methods to use the notification service, you can find the details [here](https://developer.veracity.com/doc/service-api).
 
 ### How to develop mobile apps to use push notification
 
 Notification Service can support to send push notification to native mobile apps in all kinds of different devices like Android, iOS, Windows phone etc. To be able to use the push notification from Veracity, you need to do below two things:
 
 -  In your native app, register notification template in MyDNVGL notification hub when the app starts and implement the display of notification if the notification is received while the app is active.
-- In your back-end application which is supposed to send notification, it needs to call MyDNVGL Notification API to send broadcast notification to all users of the app or notification to specified users
+- In your back-end application which is supposed to send notification, it needs to call Notification API to send broadcast notification to all users of the app or notification to specified users
 
-#### How to connect your app to MyDNVGL notification hub
+#### How to connect your app to Veracity notification hub
 
 - iOS development
 
@@ -56,7 +56,7 @@ Notification Service can support to send push notification to native mobile apps
   -  Now we have provided below notification hubs (it will be updated when we created more):
 
 
-3. MyDNVGL Notification Service uses templates to send platform-agnostic notifications targeting all devices across platforms, see more info here. So you need to define your notification template that you would like to use for your app users, here is the example:
+3. Notification Service uses templates to send platform-agnostic notifications targeting all devices across platforms, see more info here. So you need to define your notification template that you would like to use for your app users, here is the example:
 ``` Object C: 
 NSString* templateBodyAPNS = @"{\"aps\":{\"alert\":\"$(Message)\", \"action\":\"$(action)\", \"type\":\"$(type)\"}}";
 ```
@@ -123,4 +123,4 @@ public void subscribeToCategories(final Set<String> categories) {
 6. How to show the notification when it's received while the app is active, you need to implement the method onReceive on MyHandler.java as the demo application.
 
 #### How to send notification through your back-end application
-It needs to call Send Message API to send notification, please refer Service API for Notification. 
+It needs to call Send Message API to send notification, please refer [Service API](https://developer.veracity.com/doc/service-api) for Notification. 
