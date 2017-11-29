@@ -55,7 +55,13 @@ Notification Service can support to send push notification to native mobile apps
   - If you are using explicit app id, then it means you need a separated notification hub for your app to send push notification. please generate a certification for your app id through Apple Developer Center. After you get the certification, please send it to Veracity team. Someone in Veracity team will create a notification hub for your app and config the apple notification service to use the certificate to send push notification. He can also send you the notification hub name and connection string that you will use them in your native app.
   - If you are using wildcard app id, please check with Veracity team whether this app id has already been registered in  Notification Service. If it is already registered, you can ask for the notification hub name and connection string for this wildcard app id. if it hasn't been registered yet, please generate a certification for your app id through Apple Developer Center. Then you can ask Veracity team to create notification hub and send you back the hub name and connection string.
   -  Now we have provided below notification hubs (it will be updated when we created more):
-  
+
+Environment | Hub name | App Id Suffix (bundle id) | Certificate File | Demo App
+----------- | -------- | ------------------------- | ---------------- | ---------
+Test | mydnvglnotificationtest | com.dnvgl.mydnvglnotificationdemo | MyDNVGLNotificationDemo.p12 | MyDNVGLNotificationDemo.ipa
+Stag | mydnvglnotificationstag | com.dnvgl.mydnvglnotificationdemo | MyDNVGLNotificationDemo.p12 | MyDNVGLNotificationDemo-Stag.ipa
+Prod | mydnvglnotification | com.dnvgl.mydnvglnotificationdemo | MyDNVGLNotificationDemo.p12 | MyDNVGLNotificationDemo-Prod.ipa
+
 3. Notification Service uses templates to send platform-agnostic notifications targeting all devices across platforms, see more info here. So you need to define your notification template that you would like to use for your app users, here is the example:
 
 ``` Object C: 
@@ -88,6 +94,12 @@ result = [hub registerTemplateWithDeviceToken:self.deviceToken name:@"simpleAPNS
 2. When register your app for push notifications:
 Please check with MYDNVGL team and ask for th notification hub name,sender id and connection string.
 Now we have provided below notification hubs (it will be updated when we create more).
+
+Environment | Hub name | SenderID | DemoApp
+----------- | -------- | -------- | -------
+Prod | MyDNVGLNotification | 570154396303 | AndroidDemoProd
+Stag | mydnvglnotificationstag | 570154396303 | AndroidDemoStag
+Test | mydnvglnotificationtest | 570154396303 | AndroidDemoTest
 
 3. Notification Service uses templates to send platform-agnostic notifications targeting all devices across platforms and we can push notifications by using tags, see more info here. And on android side you should define template to accept the message:
 
